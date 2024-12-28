@@ -1,0 +1,29 @@
+{
+  "default_branch": "main",
+  "extensions": [
+    ".py", ".js", ".ts", ".jsx", ".tsx",
+    ".java", ".c", ".cpp", ".cs", ".rb",
+    ".go", ".php", ".html", ".css", ".scss",
+    ".json", ".md", ".yml", ".yaml"
+  ],
+  "skip_folders": [
+    ".git",
+    ".github",
+    "node_modules",
+    "dist",
+    "build",
+    "__pycache__",
+    ".venv",
+    ".idea"
+  ],
+  "skip_files": [
+    "LICENSE",
+    "LICENSE.txt",
+    "LICENSE.md",
+    "LICENSE.rst",
+    "COPYING",
+    "COPYING.txt",
+    ".gitignore"
+  ],
+  "download_folder": "downloads"
+}
