@@ -13,8 +13,7 @@
     "dist",
     "build",
     "__pycache__",
-    ".venv",
-    ".idea"
+    ".venv"
   ],
   "skip_files": [
     "LICENSE",
@@ -22,8 +21,8 @@
     "LICENSE.md",
     "LICENSE.rst",
     "COPYING",
-    "COPYING.txt",
-    ".gitignore"
+    "COPYING.txt"
   ],
-  "download_folder": "downloads"
+  "download_folder": "repos",
+  "max_file_size_mb": 1.0
 }
