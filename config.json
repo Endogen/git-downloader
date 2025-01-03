@@ -21,8 +21,9 @@
     "LICENSE.md",
     "LICENSE.rst",
     "COPYING",
-    "COPYING.txt"
+    "COPYING.txt",
+    ".gitignore"
   ],
-  "download_folder": "repos",
+  "download_folder": "downloads",
   "max_file_size_mb": 1.0
 }
