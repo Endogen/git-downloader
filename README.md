@@ -62,6 +62,7 @@ python download.py https://github.com/user/repo.git \
 - `--branch`, `-b`: Which branch to clone (overrides config's default_branch)
 - `--output`, `-o`: Custom name for output file
 - `--exclude`, `-e`: Additional folders to exclude (added to skip_folders from config)
+- `--only`, `-i`: Only include files from this folder path (relative to repo root)
 - `--max-file-size`: Maximum file size in MB (overrides config value)
 - `--stats`: Show processing statistics (file counts, sizes, etc.)
 - `--include-binary`: Include binary files (base64 encoded)
@@ -127,13 +128,14 @@ The config file has the following structure:
 To download a repository and exclude its documentation and test folders, while also getting processing statistics:
 
 ```bash
-python download.py https://github.com/user/repo.git --exclude docs tests --stats
+python download.py https://github.com/user/repo.git --only src --exclude docs tests --stats
 ```
 
 This will:
 1. Clone the repository
-2. Remove excluded folders
-3. Combine all remaining files into a single text file with path headers
-4. Show statistics about processed files
-5. Save the result in the configured download folder
-6. Clean up temporary files
+2. Process only files from specified folders (if --only is used)
+3. Remove excluded folders (if --exclude is used)
+4. Combine all remaining files into a single text file with path headers
+5. Show statistics about processed files (if --stats is used)
+6. Save the result in the configured download folder
+7. Clean up temporary files

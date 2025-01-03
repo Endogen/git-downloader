@@ -192,6 +192,7 @@ def gather_files_into_single_text(
         skip_folders: Optional[Set[str]] = None,
         skip_files: Optional[Set[str]] = None,
         max_file_size_mb: float = 1.0,
+        only_folder: Optional[str] = None,
         stats: Optional[Stats] = None
 ) -> None:
     """Gather files into single text with statistics tracking."""
@@ -204,6 +205,9 @@ def gather_files_into_single_text(
 
     root = Path(root_path)
 
+    # If only_folder is specified, create the full path
+    target_folder = root / only_folder if only_folder else None
+
     with open(output_file, "w", encoding="utf-8") as out_f:
         for file_path in root.rglob("*"):
             if file_path.is_dir():
@@ -212,7 +216,12 @@ def gather_files_into_single_text(
             stats.total_files += 1
             path_str = str(file_path.relative_to(root)).replace("\\", "/")
 
-            # Check size first to avoid unnecessary processing
+            # Check if file is in target folder when only_folder is specified
+            if target_folder and not str(file_path).startswith(str(target_folder)):
+                stats.skipped_by_folder += 1
+                continue
+
+            # Rest of the checks remain the same
             if is_file_too_large(file_path, max_file_size_mb):
                 stats.skipped_by_size += 1
                 continue
@@ -290,6 +299,11 @@ def main():
         action="store_true",
         help="Include binary files (base64 encoded)"
     )
+    parser.add_argument(
+        "--only",
+        "-i",
+        help="Only include files from this folder path (relative to repo root)"
+    )
 
     args = parser.parse_args()
 
@@ -339,6 +353,7 @@ def main():
         skip_folders=skip_folders,
         skip_files=skip_files,
         max_file_size_mb=max_file_size,
+        only_folder=args.only,
         stats=stats
     )
 
